@@ -1,11 +1,17 @@
 from PIL import Image, ImageDraw, ImageTk
 import screeninfo
 import tkinter
+import sys
 
 WINDOW_NAME = 'image'
 IMAGE_PATH = 'thirds.png'
 LINE_COLOR = 'white'
-LINE_COLOR_ALPHA = 0.8
+LINE_COLOR_ALPHA_DEFAULT = 0.8
+
+if len(sys.argv) > 1:
+    line_color_alpha = sys.argv[1]
+else:
+    line_color_alpha = LINE_COLOR_ALPHA_DEFAULT
 
 def get_screen_size():
     screen_id = 0
@@ -44,7 +50,7 @@ def show_image(img, width, height):
 
     # Create transparent window
     win.attributes('-fullscreen', True)
-    win.attributes('-alpha', LINE_COLOR_ALPHA)
+    win.attributes('-alpha', line_color_alpha)
 
     #Create a canvas
     canvas= tkinter.Canvas(win, bg='black', width=width, height=height)
